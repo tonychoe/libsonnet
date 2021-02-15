@@ -28,7 +28,7 @@ local services = ingressroute.spec.routes.services;
 
 {
   my_ingressroute:
-    ingressroute.new('my_ingressroute') +
+    ingressroute.new('my-ingressroute') +
     ingressroute.spec.withEntryPointsMixins('websecure') +
     ingressroute.spec.withRoutesMixins(
       routes.new("Host(`my.world.com`) && PathPrefix(`/prometheus`)" ) +
