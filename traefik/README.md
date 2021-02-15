@@ -17,22 +17,27 @@ To use, in your Tanka environment's `main.jsonnet` file:
 
 ```jsonnet
 local ingressroute = (import "traefik/v1/ingressroute.libsonnet");
+```
+
+## Example
+
+```jsonnet
+local ingressroute = import 'traefik/v1/ingressroute.libsonnet';
+local routes = ingressroute.spec.routes;
+local services = ingressroute.spec.routes.services;
 
 {
-  ingressroute:
-    ingressroute.new('example') +
-    ingressroute.metadata.withLabelsMixin({
-      'app.kubernetes.io/name': 'example',
-    }) +
+  my_ingressroute:
+    ingressroute.new('my_ingressroute') +
     ingressroute.spec.withEntryPointsMixins('websecure') +
     ingressroute.spec.withRoutesMixins(
-      route.new("PathPrefix(`/hotrod`) || PathPrefix(`/demo`)") +
-      route.withKind('Rule') +
-      route.withServicesMixins([
-        service.new('hotrod') +
-        service.withPort(8080),
-      ])
-    ) +
+      routes.new("Host(`my.world.com`) && PathPrefix(`/prometheus`)" ) +
+      routes.withKind('Rule') +
+      routes.withServicesMixins([
+        services.new('promkube-prometheus') +
+        services.withNamespace('promkube') +
+        services.withPort(9090),
+      ]) 
+    ) 
 }
-
 ```
