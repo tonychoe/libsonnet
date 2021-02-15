@@ -9,7 +9,7 @@ To use this mixin, install [Tanka](https://tanka.dev/) and [Jsonnet Bundler](htt
 Then you can install the library with:
 
 ```bash
-$ jb install github.com/tonychoe/libsonnet/traefik/v1
+$ jb install github.com/tonychoe/libsonnet/traefik-ingressroute
 ```
 
 To use, in your Tanka environment's `main.jsonnet` file:
