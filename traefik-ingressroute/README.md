@@ -16,13 +16,13 @@ To use, in your Tanka environment's `main.jsonnet` file:
 
 
 ```jsonnet
-local ingressroute = (import "traefik/v1/ingressroute.libsonnet");
+local ingressroute = (import "traefik-ingressroute/v1/main.libsonnet");
 ```
 
 ## Example
 
 ```jsonnet
-local ingressroute = import 'traefik/v1/ingressroute.libsonnet';
+local ingressroute = import 'traefik-ingressroute/v1/main.libsonnet';
 local routes = ingressroute.spec.routes;
 local services = ingressroute.spec.routes.services;
 
