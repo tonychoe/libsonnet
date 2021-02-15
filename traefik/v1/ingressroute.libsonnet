@@ -26,15 +26,15 @@
     # Maps the incoming requests to the services that can handle them. 
     # **Note:** This function appends passed data to existing values
     withRoutesMixins(routes): { spec+: { routes+: if std.isArray(v=routes) then routes else [routes] } },
-    route: {
+    routes: {
       # Returns a new route
       new(match): {
         match: match,
       },
       withKind(kind): { kind: kind },
       withPriority(priority): { priority: priority },
-      withServicesMixins(services): { services+: { services+: if std.isArray(v=services) then services else [services] } },
-      service: {
+      withServicesMixins(services): { services+: if std.isArray(v=services) then services else [services] },
+      services: {
         # Returns a new service
         new(name): {
           name: name,
