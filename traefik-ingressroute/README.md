@@ -21,5 +21,5 @@ local ingressroute = (import "traefik-ingressroute/v1/ingressroute.libsonnet");
 
 ## Example
 
-* [Example 1](../../docs/examples/ingressroute.jsonnet)
+* [Example 1](../docs/examples/ingressroute.jsonnet)
 
