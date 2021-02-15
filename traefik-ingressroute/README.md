@@ -21,23 +21,5 @@ local ingressroute = (import "traefik-ingressroute/v1/ingressroute.libsonnet");
 
 ## Example
 
-```jsonnet
-local ingressroute = import 'traefik-ingressroute/v1/ingressroute.libsonnet';
-local routes = ingressroute.spec.routes;
-local services = ingressroute.spec.routes.services;
+* [Example 1](../../docs/examples/ingressroute.jsonnet)
 
-{
-  my_ingressroute:
-    ingressroute.new('my-ingressroute') +
-    ingressroute.spec.withEntryPointsMixins('websecure') +
-    ingressroute.spec.withRoutesMixins(
-      routes.new("Host(`my.world.com`) && PathPrefix(`/prometheus`)" ) +
-      routes.withKind('Rule') +
-      routes.withServicesMixins([
-        services.new('promkube-prometheus') +
-        services.withNamespace('promkube') +
-        services.withPort(9090),
-      ]) 
-    ) 
-}
-```
