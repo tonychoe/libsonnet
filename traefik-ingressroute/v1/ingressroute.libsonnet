@@ -20,12 +20,12 @@
     withEntryPoints(entryPoints): { spec+: { entryPoints: if std.isArray(v=entryPoints) then entryPoints else [entryPoints] } },
     # Port that is used as the traffic entry point.  
     # **Note:** This function appends passed data to existing values
-    withEntryPointsMixins(entryPoints): { spec+: { entryPoints+: if std.isArray(v=entryPoints) then entryPoints else [entryPoints] } },
+    withEntryPointsMixin(entryPoints): { spec+: { entryPoints+: if std.isArray(v=entryPoints) then entryPoints else [entryPoints] } },
     # Maps the incoming requests to the services that can handle them. 
     withRoutes(routes): { spec+: { routes: if std.isArray(v=routes) then routes else [routes] } },
     # Maps the incoming requests to the services that can handle them. 
     # **Note:** This function appends passed data to existing values
-    withRoutesMixins(routes): { spec+: { routes+: if std.isArray(v=routes) then routes else [routes] } },
+    withRoutesMixin(routes): { spec+: { routes+: if std.isArray(v=routes) then routes else [routes] } },
     routes: {
       # Returns a new route
       new(match): {
@@ -33,7 +33,7 @@
       },
       withKind(kind): { kind: kind },
       withPriority(priority): { priority: priority },
-      withServicesMixins(services): { services+: if std.isArray(v=services) then services else [services] },
+      withServicesMixin(services): { services+: if std.isArray(v=services) then services else [services] },
       services: {
         # Returns a new service
         new(name): {
