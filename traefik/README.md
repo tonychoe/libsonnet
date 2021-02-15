@@ -4,27 +4,35 @@ This repository contains the Jsonnet library for [Traefik](https://traefik.io/).
 
 ## Usage
 
-#### With [Tanka](https://tanka.dev)
+To use this mixin, install [Tanka](https://tanka.dev/) and [Jsonnet Bundler](https://tanka.dev/install#jsonnet-bundler).
+
+Then you can install the library with:
 
 ```bash
 $ jb install github.com/tonychoe/libsonnet/traefik/v1
 ```
 
-Then put the following into `lib/k.libsonnet`:
+To use, in your Tanka environment's `main.jsonnet` file:
+
 
 ```jsonnet
-(import "github.com/github.com/tonychoe/libsonnet/traefik/v1/main.libsonnet")
+local ingressroute = (import "traefik/ingressroute.libsonnet");
 
-```
+{
+  ingressroute:
+    ingressroute.new('example') +
+    ingressroute.metadata.withLabelsMixin({
+      'app.kubernetes.io/name': 'example',
+    }) +
+    ingressroute.spec.withEntryPointsMixins('websecure') +
+    ingressroute.spec.withRoutesMixins(
+      route.new("PathPrefix(`/hotrod`) || PathPrefix(`/demo`)") +
+      route.withKind('Rule') +
+      route.withServicesMixins([
+        service.new('hotrod') +
+        service.withPort(8080),
+      ])
+    ) +
+}
 
-#### Standalone
-
-```bash
-$ jb install github.com/tonychoe/libsonnet/traefik/v1
-```
-
-Then import it in your project:
-
-```jsonnet
-local k = import "github.com/tonychoe/libsonnet/traefik/v1/main.libsonnet"
 ```
