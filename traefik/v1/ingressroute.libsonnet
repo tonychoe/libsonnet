@@ -40,6 +40,7 @@
           name: name,
         },
         withKind(kind): { kind: kind },
+        withNamespace(namespace): { namespace: namespace },
         withPort(port): { port: port },
         withStrategy(strategy): { strategy: strategy },
         withServersTransport(serversTransport): { serversTransport: serversTransport },
