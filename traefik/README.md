@@ -16,7 +16,7 @@ To use, in your Tanka environment's `main.jsonnet` file:
 
 
 ```jsonnet
-local ingressroute = (import "traefik-ingressroute/v1/traefik.libsonnet");
+local traefik = (import "traefik/v1/traefik.libsonnet");
 ```
 
 ## Example
