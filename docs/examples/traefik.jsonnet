@@ -2,11 +2,11 @@ local traefik = (import "traefik/v1/traefik.libsonnet");
 
 traefik {
   # Use this to override the image
-	_images+:: {
-	},
+  _images+:: {
+  ,
 
   # Use this to override the config
- 	_config+:: {
+  _config+:: {
     traefik_namespace: 'traefik',
     # this name is used in two places
     # 1) Resource name, suffixed by '-traefik'
