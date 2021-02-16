@@ -3,7 +3,7 @@ local traefik = (import "traefik/v1/traefik.libsonnet");
 traefik {
   # Use this to override the image
   _images+:: {
-  ,
+  },
 
   # Use this to override the config
   _config+:: {
