@@ -1,4 +1,4 @@
-# Traefik Jsonnet Library
+# Traefik IngressRoute Jsonnet Library
 
 This repository contains the Jsonnet library for [Traefik](https://traefik.io/)'s [IngressRoute](https://doc.traefik.io/traefik/master/routing/providers/kubernetes-crd/). IngressRoute is the Kubnernetes Ingress Controller CRD for Traefik.
 
