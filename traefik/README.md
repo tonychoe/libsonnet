@@ -12,7 +12,8 @@ Then you can install the library with:
 $ jb install github.com/tonychoe/libsonnet/traefik/1.1
 ```
 
-To install the Traefik Custom Resoruce Definition (cluster-wide resource), in your Tanka environment's `crd.jsonnet` file:
+Install the Traefik Custom Resoruce Definition (cluster-wide resource) if not installed.
+To install,, in your Tanka environment's `crd.jsonnet` file:
 
 ```jsonnet
 local crd = (import "traefik/1.1/traefik-crd.libsonnet");
@@ -31,9 +32,9 @@ traefik {
 }
 ```
 
-To deploy ingressroute, see the example
+To deploy the ingressroute, see the example.
 
 ## Example
 
-* [Example 1](../docs/examples/traefik.jsonnet)
+* [Example 1](examples/traefik.jsonnet)
 
