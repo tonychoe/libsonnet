@@ -19,8 +19,8 @@ k {
       '--tracing.jaeger=%s' % $._config.traefik.tracing_jaeger,
       '--tracing.serviceName=%s' % $._config.traefik.tracing_service_name,
       '--tracing.jaeger.localAgentHostPort=%s' % $._config.traefik.tracing_jaeger_agent,
-      '--tracing.jaeger.samplingType=%s' % $._config.traefik.jaeger_sampling_type,
-      '--tracing.jaeger.samplingServerURL=%s' % $._config.traefik.jaeger_sampling_server,
+      '--tracing.jaeger.samplingType=%s' % $._config.traefik.tracing_jaeger_sampling_type,
+      '--tracing.jaeger.samplingServerURL=%s' % $._config.traefik.tracing_jaeger_sampling_server,
   ],
 
   local containerArgs = 
