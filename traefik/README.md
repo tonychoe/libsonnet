@@ -4,7 +4,7 @@ This repository contains the Jsonnet library for [Traefik](https://traefik.io/).
 
 ## Usage
 
-To use this mixin, install [Tanka](https://tanka.dev/) and [Jsonnet Bundler](https://tanka.dev/install#jsonnet-bundler).
+To use this library, install [Tanka](https://tanka.dev/) and [Jsonnet Bundler](https://tanka.dev/install#jsonnet-bundler).
 
 Then you can install the library with:
 
@@ -12,12 +12,26 @@ Then you can install the library with:
 $ jb install github.com/tonychoe/libsonnet/traefik/v1
 ```
 
-To use, in your Tanka environment's `main.jsonnet` file:
-
+To install the Traefik Custom Resoruce Definition (cluster-wide resource), in your Tanka environment's `crd.jsonnet` file:
 
 ```jsonnet
-local traefik = (import "traefik/v1/traefik.libsonnet");
+local crd = (import "traefik/1.1/traefik-crd.libsonnet");
 ```
+and use 'tk apply'.
+
+To deploy traefik, in your Tanka environment's `main.jsonnet` file:
+
+```jsonnet
+local traefik = (import "1.1/traefik.libsonnet");
+
+traefik {
+  _config+:: {
+    namespace: "default",
+  },
+}
+```
+
+To deploy ingressroute, see the example
 
 ## Example
 
