@@ -9,7 +9,7 @@ To use this library, install [Tanka](https://tanka.dev/) and [Jsonnet Bundler](h
 Then you can install the library with:
 
 ```bash
-$ jb install github.com/tonychoe/libsonnet/traefik/v1
+$ jb install github.com/tonychoe/libsonnet/traefik/1.1
 ```
 
 To install the Traefik Custom Resoruce Definition (cluster-wide resource), in your Tanka environment's `crd.jsonnet` file:

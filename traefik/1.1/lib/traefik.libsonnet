@@ -155,5 +155,4 @@ k {
 
   traefik_service:
     $.util.serviceFor($.traefik_deployment),
-
 }
