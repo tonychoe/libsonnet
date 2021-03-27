@@ -16,7 +16,7 @@ $ jb install github.com/tonychoe/libsonnet/traefik
 
 * They are the cluster-wide resource, so you just need to install only once.
 
-To install,, in your Tanka environment's `crd.jsonnet` file:
+To install, in your Tanka environment's `crd.jsonnet` file:
 
 ```jsonnet
 local crd = (import "traefik/v1/traefik-crd.libsonnet");
