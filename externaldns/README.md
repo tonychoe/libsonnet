@@ -35,8 +35,14 @@ externaldns {
     namespace: 'YOURNAMESPACE',
 
     external_dns+:: {
+      # release_name is used in two places
+      # 1) Resource name, suffixed by '-external-dns'
+      # 2) value for the metadata.labels."app.kubernetes.io/instance"
       release_name: 'YOURRELEASENAME',
       txt_owner_id: 'YOUROWNERID',
+      // Pass extra args to ExternalDNS
+      extraArgs: [
+      ],
     },
   }
 }
