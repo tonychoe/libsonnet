@@ -19,14 +19,14 @@ $ jb install github.com/tonychoe/libsonnet/traefik
 To install,, in your Tanka environment's `crd.jsonnet` file:
 
 ```jsonnet
-local crd = (import "traefik/v1.1/traefik-crd.libsonnet");
+local crd = (import "traefik/v1/traefik-crd.libsonnet");
 ```
 and use 'tk apply' with the `crd.jsonnet` file.
 
 (4) To deploy traefik, in your Tanka environment's `main.jsonnet` file:
 
 ```jsonnet
-local traefik = (import "traefik/v1.1/traefik.libsonnet");
+local traefik = (import "traefik/v1/traefik.libsonnet");
 
 traefik {
   _config+:: {

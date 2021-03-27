@@ -1,4 +1,4 @@
-local traefik = (import "traefik/1.1/traefik.libsonnet");
+local traefik = (import "traefik/1/traefik.libsonnet");
 
 traefik {
   # Use this to override the image
