@@ -12,18 +12,21 @@ This repository contains the Jsonnet library for [Traefik](https://traefik.io/).
 $ jb install github.com/tonychoe/libsonnet/traefik
 ```
 
-(3) Install the Traefik Custom Resoruce Definition (cluster-wide resource) if not installed.
+(3) Install the Traefik CRDs:
+
+* They are the cluster-wide resource, so you just need to install only once.
+
 To install,, in your Tanka environment's `crd.jsonnet` file:
 
 ```jsonnet
-local crd = (import "traefik/1.1/traefik-crd.libsonnet");
+local crd = (import "traefik/v1.1/traefik-crd.libsonnet");
 ```
-and use 'tk apply'.
+and use 'tk apply' with the `crd.jsonnet` file.
 
 (4) To deploy traefik, in your Tanka environment's `main.jsonnet` file:
 
 ```jsonnet
-local traefik = (import "1.1/traefik.libsonnet");
+local traefik = (import "traefik/v1.1/traefik.libsonnet");
 
 traefik {
   _config+:: {
