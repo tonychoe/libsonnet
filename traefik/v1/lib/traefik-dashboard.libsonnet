@@ -1,4 +1,4 @@
-local ingressroute = (import '1.1/lib/ingressroute.libsonnet');
+local ingressroute = (import 'ingressroute.libsonnet');
 
 {
   local routes = ingressroute.spec.routes,
