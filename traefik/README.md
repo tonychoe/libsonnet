@@ -20,6 +20,8 @@ To install, in your Tanka environment's `crd.jsonnet` file:
 
 ```jsonnet
 local crd = (import "traefik/v1/traefik-crd.libsonnet");
+crd = {
+}
 ```
 and use 'tk apply' with the `crd.jsonnet` file.
 
