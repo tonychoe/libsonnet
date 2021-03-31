@@ -16,8 +16,8 @@
     kind: 'IngressRoute',
   } + self.metadata.withName(name=name) +
   self.metadata.withLabelsMixin({
-    'app.kubernetes.io/name': 'traefik',
-    'app.kubernetes.io/instance': name,
+    'name': 'traefik',
+    'app': name,
   }),
   spec: {
     # Port that is used as the traffic entry point.  
