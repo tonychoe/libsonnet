@@ -65,4 +65,5 @@ local servicemonitor = (import "servicemonitor/servicemonitor.libsonnet");
 
 ## Credits To
 
+This project is deeply infuenced by [jsonnet-libs/k8s-alpha](https://github.com/jsonnet-libs/k8s-alpha).
 
