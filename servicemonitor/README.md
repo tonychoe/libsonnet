@@ -4,7 +4,7 @@ This repository contains the Jsonnet library for [ServiceMonitor](https://github
 
 ## Usage
 
-(1) To use this library, install [Tanka](https://tanka.dev/) and [Jsonnet Bundler](https://tanka.dev/install#jsonnet-bundler).
+(1) To use this library, install [Tanka](https://tanka.dev/), [Jsonnet Bundler](https://tanka.dev/install#jsonnet-bundler) and Prometheus Operator CRD.
 
 (2) Then you can install the library with:
 
