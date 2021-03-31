@@ -50,7 +50,7 @@ local servicemonitor = (import "servicemonitor/servicemonitor.libsonnet");
 
 * [Example](docs/servicemonitor.jsonnet)
 
-## Changes
+## License
 
-* 2021/03/31 - First release; supports ServiceMonitor, ServiceMonitorSpec, Endpoint, NamespaceSelector, RelabelConfig
+Apache License 2.0, see [LICENSE](LICENSE).
 
