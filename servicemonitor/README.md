@@ -34,15 +34,28 @@ local servicemonitor = (import "servicemonitor/servicemonitor.libsonnet");
 
   consul_servicemoniter:
     local app = 'consul';
-    servicemonitor.new( app, [
-      endpoint.new( ) + endpoint.withPort( 'statsd-exporter-http-metrics' ) + endpoint.withRelabelings( $.relabelconfig ),
-      endpoint.new( ) + endpoint.withPort( 'consul-exporter-http-metrics' ) + endpoint.withRelabelings( $.relabelconfig ),
-    ],
-    servicemonitor.labelSelector.withMatchLabels( { name: app } ) ),
+    servicemonitor.new( 
+      app, 
+      [
+        endpoint.new( ) 
+        + endpoint.withPort( 'statsd-exporter-http-metrics' )
+        + endpoint.withRelabelings( $.relabelconfig ),
+        endpoint.new( )
+        + endpoint.withPort( 'consul-exporter-http-metrics' )
+        + endpoint.withRelabelings( $.relabelconfig ),
+      ],
+      servicemonitor.labelSelector.withMatchLabels( { name: app } ) 
+    ),
 
   memcached_servicemoniter:
     local app = 'memcached';
-    servicemonitor.new( app, endpoint.new( ) + endpoint.withPort( 'exporter-http-metrics' ) + endpoint.withRelabelings( $.relabelconfig ), servicemonitor.labelSelector.withMatchLabels( { name: app } ) ),
+    servicemonitor.new( 
+      app, 
+      endpoint.new( ) 
+      + endpoint.withPort( 'exporter-http-metrics' )
+      + endpoint.withRelabelings( $.relabelconfig ), 
+      servicemonitor.labelSelector.withMatchLabels( { name: app } ) 
+    ),
 }
 ```
 
@@ -50,7 +63,6 @@ local servicemonitor = (import "servicemonitor/servicemonitor.libsonnet");
 
 * [Example](docs/servicemonitor.jsonnet)
 
-## License
+## Credits To
 
-Apache License 2.0, see [LICENSE](LICENSE).
 

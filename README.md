@@ -7,3 +7,7 @@ This repostiory contains the various Jsonnet library.
 * [`externaldns`](externaldns): A library for building ExternalDNS with jsonnet
 * [`servicemonitor`](servicemonitor): A library for building ServiceMonitor with jsonnet
 * [`traefik`](traefik): A library for building Traefik with jsonnet
+
+## License
+
+Apache License 2.0, see [LICENSE](LICENSE).
