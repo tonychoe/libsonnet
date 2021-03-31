@@ -1,7 +1,12 @@
 local k = import 'ksonnet-util/kausal.libsonnet';
 
 k {
-  local boilerplateMetadata = { 'name': 'traefik', 'app': $._config.traefik.release_name },
+  local boilerplateMetadata = { 
+    // 'name': 'traefik', 
+    // 'app': $._config.traefik.release_name,
+    'app.kubernetes.io/name': 'traefik',
+    'app.kubernetes.io/instance': $._config.traefik.release_name,
+  },
 
   # Make arguments to pass to the traefik container
   local boilerplateArgs = [
