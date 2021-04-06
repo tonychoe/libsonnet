@@ -44,6 +44,14 @@ k {
   traefik_container::
     container.new($._config.traefik.release_name + 'traefik', $._images.traefik_image) +
     container.withArgs(containerArgs) +
+    container.withEnv( [ {
+      "name": "JAEGER_AGENT_HOST",
+      "valueFrom": {
+         "fieldRef": {
+            "fieldPath": "status.hostIP"
+         }
+      }
+    } ] ) +
     container.withPorts([
       containerPort.newNamed($._config.traefik.entrypoints_port,'traefik'),
       containerPort.newNamed($._config.traefik.entrypoints_web_port,'web'),
