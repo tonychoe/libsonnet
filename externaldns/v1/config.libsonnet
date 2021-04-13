@@ -9,7 +9,7 @@
       policy: 'sync',
       registry: 'txt',
       txt_owner_id: error 'must define txt_onwer_id for externaldns',
-      interval: '10m', 
+      interval:  '10m', 
       log_format: 'json',
       // Pass extra args to externaldns
       extraArgs: [
