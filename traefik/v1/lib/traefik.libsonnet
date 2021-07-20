@@ -1,4 +1,4 @@
-local k = import 'ksonnet-util/kausal.libsonnet';
+local k = import 'github.com/jsonnet-libs/k8s-libsonnet/1.19/main.libsonnet';
 
 k {
   local boilerplateMetadata = {
@@ -42,7 +42,7 @@ k {
   local volumeMount = $.core.v1.volumeMount,
 
   traefik_container::
-    container.new($._config.traefik.release_name + 'traefik', $._images.traefik_image) +
+    container.new($._config.traefik.release_name, $._images.traefik_image) +
     container.withArgs(containerArgs) +
     container.withEnv([{
       name: 'JAEGER_AGENT_HOST',
@@ -94,7 +94,7 @@ k {
   local serviceAccount = $.core.v1.serviceAccount,
 
   traefik_serviceaccount:
-    serviceAccount.new($._config.traefik.release_name + '-traefik') +
+    serviceAccount.new($._config.traefik.release_name) +
     serviceAccount.metadata.withLabelsMixin(boilerplateMetadata),
 
   local clusterRole = $.rbac.v1.clusterRole,
@@ -102,7 +102,7 @@ k {
 
   // installs ClusterRole and ClusterRoleBinding so Traefik can be used across namespaces.
   traefik_clusterrole:
-    clusterRole.new($._config.traefik.release_name + '-traefik') +
+    clusterRole.new($._config.traefik.release_name) +
     clusterRole.metadata.withLabelsMixin(boilerplateMetadata) +
     clusterRole.withRulesMixin([
       policyRule.withApiGroups('') +
@@ -122,28 +122,28 @@ k {
   local clusterRoleBinding = $.rbac.v1.clusterRoleBinding,
 
   traefik_clusterrolebinding:
-    clusterRoleBinding.new($._config.traefik.release_name + '-traefik')
+    clusterRoleBinding.new($._config.traefik.release_name)
     + clusterRoleBinding.metadata.withLabelsMixin(boilerplateMetadata)
     + clusterRoleBinding.roleRef.withApiGroup('rbac.authorization.k8s.io')
     + clusterRoleBinding.roleRef.withKind('ClusterRole')
-    + clusterRoleBinding.roleRef.withName($._config.traefik.release_name + '-traefik')
+    + clusterRoleBinding.roleRef.withName($._config.traefik.release_name)
     + clusterRoleBinding.withSubjectsMixin({
       kind: 'ServiceAccount',
-      name: $._config.traefik.release_name + '-traefik',
+      name: $._config.traefik.release_name,
       namespace: '%s' % $._config.namespace,
     }),
 
   local deployment = $.apps.v1.deployment,
 
   traefik_deployment:
-    deployment.new('traefik', $._config.traefik.replicas, $.traefik_container, boilerplateMetadata)
+    deployment.new($._config.traefik.release_name, $._config.traefik.replicas, $.traefik_container, boilerplateMetadata)
     + deployment.metadata.withLabelsMixin(boilerplateMetadata)
     + deployment.spec.template.metadata.withLabelsMixin(boilerplateMetadata)
     // If hostNetwork is true, runs traefik in the host network namespace
     + deployment.spec.template.spec.withHostNetwork(false)
     + deployment.spec.template.spec.withVolumesMixin($.core.v1.volume.fromEmptyDir('data'))
     + deployment.spec.template.spec.withVolumesMixin($.core.v1.volume.fromEmptyDir('tmp'))
-    + deployment.spec.template.spec.withServiceAccount($._config.traefik.release_name + '-traefik')
+    + deployment.spec.template.spec.withServiceAccount($._config.traefik.release_name)
     + deployment.spec.template.spec.withTerminationGracePeriodSeconds(60)
     // Defines a pod’s "file system group" ID for volume access
     + deployment.spec.template.spec.securityContext.withFsGroup(65532)

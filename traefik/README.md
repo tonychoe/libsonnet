@@ -16,14 +16,17 @@ $ jb install github.com/tonychoe/libsonnet/traefik
 
 * They are the cluster-wide resource, so you just need to install only once.
 
-To install, in your Tanka environment's `crd.jsonnet` file:
-
 ```jsonnet
-local crd = (import "traefik/v1/traefik-crd.libsonnet");
-crd = {
-}
+kubectl apply -f https://raw.githubusercontent.com/traefik/traefik-helm-chart/master/traefik/crds/ingressroute.yaml
+kubectl apply -f https://raw.githubusercontent.com/traefik/traefik-helm-chart/master/traefik/crds/ingressroutetcp.yaml
+kubectl apply -f https://raw.githubusercontent.com/traefik/traefik-helm-chart/master/traefik/crds/ingressrouteudp.yaml
+kubectl apply -f https://raw.githubusercontent.com/traefik/traefik-helm-chart/master/traefik/crds/middlewares.yaml
+kubectl apply -f https://raw.githubusercontent.com/traefik/traefik-helm-chart/master/traefik/crds/middlewarestcp.yaml
+kubectl apply -f https://raw.githubusercontent.com/traefik/traefik-helm-chart/master/traefik/crds/serverstransports.yaml
+kubectl apply -f https://raw.githubusercontent.com/traefik/traefik-helm-chart/master/traefik/crds/tlsoptions.yaml
+kubectl apply -f https://raw.githubusercontent.com/traefik/traefik-helm-chart/master/traefik/crds/tlsstores.yaml
+kubectl apply -f https://raw.githubusercontent.com/traefik/traefik-helm-chart/master/traefik/crds/traefikservices.yaml
 ```
-and use 'tk apply' with the `crd.jsonnet` file.
 
 (4) To deploy traefik, in your Tanka environment's `main.jsonnet` file:
 
