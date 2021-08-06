@@ -9,6 +9,8 @@ This repository contains the Jsonnet library for [ServiceMonitor](https://github
 (2) Then you can install the library with:
 
 ```bash
+# Run this command at your tanka home
+
 $ jb install github.com/tonychoe/libsonnet/servicemonitor
 ```
 
