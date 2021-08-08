@@ -33,17 +33,18 @@
   },
 
   // New returns an instance of serviceMonitor
-  new(name, endpoints, selector): {
-                                    apiVersion: 'monitoring.coreos.com/v1',
-                                    kind: 'ServiceMonitor',
-                                  }
-                                  + self.spec.withEndpoints(endpoints)
-                                  + self.spec.withSelector(selector)
-                                  + self.metadata.withName(name)
-                                  + self.metadata.withLabelsMixin({
-                                    'app.kubernetes.io/name': name,
-                                    'app.kubernetes.io/instance': 'servicemonitor',
-                                  }),
+  new(name, endpoints, selector):
+    {
+      apiVersion: 'monitoring.coreos.com/v1',
+      kind: 'ServiceMonitor',
+    }
+    + self.spec.withEndpoints(endpoints)
+    + self.spec.withSelector(selector)
+    + self.metadata.withName(name)
+    + self.metadata.withLabelsMixin({
+      'app.kubernetes.io/name': name,
+      'app.kubernetes.io/instance': name + '-servicemonitor',
+    }),
   spec: {
     //##
     // ServiceMonitorSpec contains specification parameters for a ServiceMonitor.
