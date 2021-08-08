@@ -1,4 +1,5 @@
-local k = import 'github.com/jsonnet-libs/k8s-libsonnet/1.19/main.libsonnet';
+// local k = import 'github.com/jsonnet-libs/k8s-libsonnet/1.19/main.libsonnet';
+local k = import 'k.libsonnet';
 
 k {
   local boilerplateMetadata = {
