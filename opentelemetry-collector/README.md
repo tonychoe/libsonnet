@@ -1,6 +1,6 @@
 # OpenTelemetry Collector Jsonnet Library
 
-This repository contains the Jsonnet library for ['OpenTelemetry Collector Custom Resource'](https://github.com/open-telemetry/opentelemetry-operator/blob/main/docs/otelcol_cr_spec.md).
+This repository contains the Jsonnet library for [OpenTelemetry Collector Custom Resource](https://github.com/open-telemetry/opentelemetry-operator/blob/main/docs/otelcol_cr_spec.md).
 
 ## Usage
 
