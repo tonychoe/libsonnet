@@ -1,6 +1,6 @@
 # OpenTelemetry Collector Jsonnet Library
 
-This repository contains the Jsonnet library for [`OpenTelemetry Collector CRD`](https://github.com/open-telemetry/opentelemetry-operator).
+This repository contains the Jsonnet library for [`OpenTelemetry Collector Custom Resource](https://github.com/open-telemetry/opentelemetry-operator/blob/main/docs/otelcol_cr_spec.md).
 
 ## Usage
 
@@ -20,7 +20,7 @@ $ jb install github.com/tonychoe/libsonnet/opentelemetry-collector
 local otelcollector = (import 'github.com/tonychoe/libsonnet/opentelemetry-collector/opentelemetry-collector.libsonnet');
 {
   otelcollector_gateway:
-    otelcollector.new('gateway', 'deployment', 1, $.util.manifestYaml($.otelcollector_config)),
+    otelcollector.new('daemonset', $.util.manifestYaml($.otelcollector_config)),
 
   otelcollector_config:: {
     receivers: {
