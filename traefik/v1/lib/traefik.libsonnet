@@ -28,7 +28,9 @@ k {
     '--tracing.serviceName=%s' % $._config.traefik.tracing_service_name,
     '--tracing.jaeger.localAgentHostPort=%s' % $._config.traefik.tracing_jaeger_agent,
     '--tracing.jaeger.samplingType=%s' % $._config.traefik.tracing_jaeger_sampling_type,
+    '--tracing.jaeger.samplingParam=%s' % $._config.traefik.tracing_jaeger_sampling_param,
     '--tracing.jaeger.samplingServerURL=%s' % $._config.traefik.tracing_jaeger_sampling_server,
+    '--tracing.jaeger.disableAttemptReconnecting=false',
   ],
 
   local containerArgs =
@@ -116,7 +118,7 @@ k {
       policyRule.withResources(['ingresses/status']) +
       policyRule.withVerbs(['update']),
       policyRule.withApiGroups(['traefik.containo.us']) +
-      policyRule.withResources(['ingressroutes', 'ingressroutetcps', 'ingressrouteudps', 'middlewares', 'tlsoptions', 'tlsstores', 'traefikservices', 'serverstransports']) +
+      policyRule.withResources(['ingressroutes', 'ingressroutetcps', 'ingressrouteudps', 'middlewares', 'middlewaretcps', 'tlsoptions', 'tlsstores', 'traefikservices', 'serverstransports']) +
       policyRule.withVerbs(['get', 'list', 'watch']),
     ]),
 
