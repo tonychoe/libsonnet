@@ -33,7 +33,7 @@ kubectl apply -f https://raw.githubusercontent.com/traefik/traefik-helm-chart/ma
 (4) To deploy traefik, in your Tanka environment's `main.jsonnet` file:
 
 ```jsonnet
-local traefik = (import "traefik/v1/traefik.libsonnet");
+local traefik = (import "traefik/traefik.libsonnet");
 
 traefik {
   _config+:: {
