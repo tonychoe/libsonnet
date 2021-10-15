@@ -134,7 +134,15 @@ k {
     // Defines a pod’s "file system group" ID for volume access
     + deployment.spec.template.spec.securityContext.withFsGroup(65532)
     + deployment.spec.strategy.rollingUpdate.withMaxSurge(1)
-    + deployment.spec.strategy.rollingUpdate.withMaxUnavailable(1),
+    + deployment.spec.strategy.rollingUpdate.withMaxUnavailable(1)
+    + deployment.spec.template.spec.affinity.podAntiAffinity.withRequiredDuringSchedulingIgnoredDuringExecution({
+      labelSelector: {
+        matchLabels: {
+          name: $._config.traefik.release_name,
+        },
+      },
+      topologyKey: 'kubernetes.io/hostname',
+    }),
 
   traefik_service:
     $.util.serviceFor($.traefik_deployment),
