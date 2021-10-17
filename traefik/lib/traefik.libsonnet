@@ -136,12 +136,19 @@ k {
     + deployment.spec.strategy.rollingUpdate.withMaxSurge(1)
     + deployment.spec.strategy.rollingUpdate.withMaxUnavailable(1)
     + deployment.spec.template.spec.affinity.podAntiAffinity.withPreferredDuringSchedulingIgnoredDuringExecution({
-      labelSelector: {
-        matchLabels: {
-          name: $._config.traefik.release_name,
+      weight: 100,
+      podAffinityTerm: {
+        labelSelector: {
+          matchExpressions: [{
+            key: 'name',
+            operator: 'In',
+            values: [
+              $._config.traefik.release_name,
+            ],
+          }],
         },
+        topologyKey: 'kubernetes.io/hostname',
       },
-      topologyKey: 'kubernetes.io/hostname',
     }),
 
   traefik_service:
