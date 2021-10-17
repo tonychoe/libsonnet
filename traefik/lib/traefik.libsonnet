@@ -135,7 +135,7 @@ k {
     + deployment.spec.template.spec.securityContext.withFsGroup(65532)
     + deployment.spec.strategy.rollingUpdate.withMaxSurge(1)
     + deployment.spec.strategy.rollingUpdate.withMaxUnavailable(1)
-    + deployment.spec.template.spec.affinity.podAntiAffinity.withRequiredDuringSchedulingIgnoredDuringExecution({
+    + deployment.spec.template.spec.affinity.podAntiAffinity.withPreferredDuringSchedulingIgnoredDuringExecution({
       labelSelector: {
         matchLabels: {
           name: $._config.traefik.release_name,
