@@ -6,7 +6,13 @@ This repository contains the Jsonnet library for [ServiceMonitor](https://github
 
 (1) To use this library, install [Tanka](https://tanka.dev/), [Jsonnet Bundler](https://tanka.dev/install#jsonnet-bundler) and Prometheus Operator CRD.
 
-(2) Then you can install the library with:
+(2) Ensure your cluster already have the latest version of ServiceMonitor CRD installed.
+
+```bash
+kubectl apply -f https://raw.githubusercontent.com/prometheus-community/helm-charts/main/charts/kube-prometheus-stack/crds/crd-servicemonitors.yaml
+```
+
+(3) Then you can install the library with:
 
 ```bash
 # Run this command at your tanka home
@@ -14,7 +20,7 @@ This repository contains the Jsonnet library for [ServiceMonitor](https://github
 $ jb install github.com/tonychoe/libsonnet/servicemonitor
 ```
 
-(3) To deploy ServiceMonitor, use the following example in your Tanka environment's `main.jsonnet` file:
+(4) To deploy ServiceMonitor, use the following example in your Tanka environment's `main.jsonnet` file:
 
 ```jsonnet
 local servicemonitor = (import "servicemonitor/servicemonitor.libsonnet");
