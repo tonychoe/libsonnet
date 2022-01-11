@@ -32,17 +32,17 @@
     // +optional Image indicates the container image to use for the OpenTelemetry Collector.
     withImage(image): { spec+: { image+: image } },
     // +optional ServiceAccount indicates the name of an existing service account to use with this instance.
-    withServiceAccount(serviceaccount): { spec+: { serviceaccount+: serviceaccount } },
+    withServiceAccount(serviceaccount): { spec+: { serviceAccount+: serviceaccount } },
     // +optional VolumeClaimTemplates will provide stable storage using PersistentVolumes. Only available when the mode=statefulset.
-    withVolumeClaimTemplates(volumeclaimtemplates): { spec+: { volumeclaimtemplates: if std.isArray(v=volumeclaimtemplates) then volumeclaimtemplates else [volumeclaimtemplates] } },
+    withVolumeClaimTemplates(volumeclaimtemplates): { spec+: { volumeClaimTemplates: if std.isArray(v=volumeclaimtemplates) then volumeclaimtemplates else [volumeclaimtemplates] } },
     // +optional VolumeClaimTemplates will provide stable storage using PersistentVolumes. Only available when the mode=statefulset.
     // **Note:** This function appends passed data to existing values
-    withVolumeClaimTemplatesMixin(volumeclaimtemplates): { spec+: { volumeclaimtemplates+: if std.isArray(v=volumeclaimtemplates) then volumeclaimtemplates else [volumeclaimtemplates] } },
+    withVolumeClaimTemplatesMixin(volumeclaimtemplates): { spec+: { volumeClaimTemplates+: if std.isArray(v=volumeclaimtemplates) then volumeclaimtemplates else [volumeclaimtemplates] } },
     // +optional VolumeMounts represents the mount points to use in the underlying collector deployment(s)
-    withVolumeMounts(volumemounts): { spec+: { volumemounts: if std.isArray(v=volumemounts) then volumemounts else [volumemounts] } },
+    withVolumeMounts(volumemounts): { spec+: { volumeMounts: if std.isArray(v=volumemounts) then volumemounts else [volumemounts] } },
     // +optional VolumeMounts represents the mount points to use in the underlying collector deployment(s)
     // **Note:** This function appends passed data to existing values
-    withVolumeMountsMixin(volumemounts): { spec+: { volumemounts+: if std.isArray(v=volumemounts) then volumemounts else [volumemounts] } },
+    withVolumeMountsMixin(volumemounts): { spec+: { volumeMounts+: if std.isArray(v=volumemounts) then volumemounts else [volumemounts] } },
     // +optional Volumes represents which volumes to use in the underlying collector deployment(s).
     withVolumes(volumes): { spec+: { volumes: if std.isArray(v=volumes) then volumes else [volumes] } },
     // +optional Volumes represents which volumes to use in the underlying collector deployment(s).
@@ -67,7 +67,7 @@
     // +optional Resources to set on the OpenTelemetry Collector pods.
     withResources(resources): { spec+: { resources+: resources } },
     // +optional SecurityContext will be set as the container security context.
-    withSecurityContext(securitycontext): { spec+: { securitycontext+: securitycontext } },
+    withSecurityContext(securitycontext): { spec+: { securityContext+: securitycontext } },
     // +optional Toleration to schedule OpenTelemetry Collector pods.
     // This is only relevant to daemonsets, statefulsets and deployments
     withTolerations(tolerations): { spec+: { tolerations: if std.isArray(v=tolerations) then tolerations else [tolerations] } },
