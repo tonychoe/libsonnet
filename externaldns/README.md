@@ -16,12 +16,17 @@ $ jb install github.com/tonychoe/libsonnet/externaldns
 
 (3) To deploy ExternalDNS, 
 
-First, ceate a secret with your DNS provider detail in the same namespace. The secret must be named as `external-dns-config`.
+First, create a namespace
+```bash
+kubectl create namespace YOURNAMESPACE
+```
+
+Second, create a secret with your DNS provider detail in the same namespace. The secret must be named as `external-dns-config`.
 ``` bash
 kubectl create secret generic external-dns-config --from-file=./YOURPROVIDER.yaml --namespace=YOURNAMESPACE
 ```
 
-Second, in your Tanka environment's `main.jsonnet` file:
+Third, in your Tanka environment's `main.jsonnet` file:
 
 ```jsonnet
 local externaldns = (import 'externaldns/v1/externaldns.libsonnet');
