@@ -36,7 +36,7 @@
       url: url,
     }],
   }),
-  withTraceToLogs(datasourceUid, tags, spanStartTimeShift, spanEndTimeShift, filterByTraceID, filterBySpanID):: self.withJsonData({
+  withTraceToLogs(datasourceUid, tags, spanStartTimeShift, spanEndTimeShift, filterByTraceID, filterBySpanID, lokiSearch):: self.withJsonData({
     tracesToLogs+: {
       datasourceUid: datasourceUid,
       tags: tags,
@@ -44,6 +44,17 @@
       spanEndTimeShift: spanEndTimeShift,
       filterByTraceID: filterByTraceID,
       filterBySpanID: filterBySpanID,
+      lokiSearch: lokiSearch,
+    },
+  }),
+  withServiceGraphSettings(datasourceUid):: self.withJsonData({
+    serviceMap+: {
+      datasourceUid: datasourceUid,
+    },
+  }),
+  withNodeGraph(enabled):: self.withJsonData({
+    nodeGraph+: {
+      enabled: enabled,  // boolean
     },
   }),
   withExemplars(datasourceUid, name):: self.withJsonData({

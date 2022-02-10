@@ -14,6 +14,10 @@ k {
       ],
       extraEnvs: [
       ],
+      extraMetadata: [
+      ],
+      extraLabels: [
+      ],
     },
   },
 
@@ -26,11 +30,9 @@ k {
     'app.kubernetes.io/instance': $._config.hotrod.release_name,
   },
 
-  local serviceAccount = $.core.v1.serviceAccount,
+  local hotrodMetadata = boilerplateMetadata + $._config.hotrod.extraMetadata,
 
-  hotrod_serviceaccount:
-    serviceAccount.new($._config.hotrod.release_name) +
-    serviceAccount.metadata.withLabelsMixin(boilerplateMetadata),
+  local hotrodLabels = boilerplateMetadata + $._config.hotrod.extraLabels,
 
   local containerArgs = [
                           'all',
@@ -40,6 +42,12 @@ k {
   local containerEnvs = [
                         ] +
                         $._config.hotrod.extraEnvs,
+
+  local serviceAccount = $.core.v1.serviceAccount,
+
+  hotrod_serviceaccount:
+    serviceAccount.new($._config.hotrod.release_name) +
+    serviceAccount.metadata.withLabelsMixin(hotrodLabels),
 
   local container = $.core.v1.container,
   local containerPort = $.core.v1.containerPort,
@@ -63,20 +71,20 @@ k {
   local deployment = $.apps.v1.deployment,
 
   hotrod_deployment:
-    deployment.new($._config.hotrod.release_name, $._config.hotrod.replicas, $.hotrod_container, boilerplateMetadata)
-    + deployment.metadata.withLabelsMixin(boilerplateMetadata)
-    + deployment.spec.selector.withMatchLabels(boilerplateMetadata)
-    + deployment.spec.template.metadata.withLabelsMixin(boilerplateMetadata)
+    deployment.new($._config.hotrod.release_name, $._config.hotrod.replicas, $.hotrod_container, hotrodMetadata)
+    + deployment.metadata.withLabelsMixin(hotrodMetadata)
+    + deployment.spec.selector.withMatchLabels(hotrodMetadata)
+    + deployment.spec.template.metadata.withLabelsMixin(hotrodLabels)
     + deployment.spec.template.spec.withServiceAccount($._config.hotrod.release_name),
 
   local service = $.core.v1.service,
   local servicePort = $.core.v1.servicePort,
 
   hotrod_service:
-    service.new($._config.hotrod.release_name, boilerplateMetadata, [
+    service.new($._config.hotrod.release_name, hotrodMetadata, [
       servicePort.newNamed('http', $._config.hotrod.http_port, 'http'),
       servicePort.newNamed('metrics', $._config.hotrod.metrics_port, 'metrics'),
     ]) +
-    service.metadata.withLabelsMixin(boilerplateMetadata) +
+    service.metadata.withLabelsMixin(hotrodLabels) +
     service.spec.withType('ClusterIP'),
 }
