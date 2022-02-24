@@ -53,12 +53,10 @@ k + config {
 
   agent_container::
     container.new('agent', $._images.otelcol) +
-    container.withPortsMixin($.core.v1.containerPort.newNamed(4317, 'otlp-grpc')) +
-    container.withPortsMixin($.core.v1.containerPort.newNamed(4318, 'otlp-http')) +
-    container.withPortsMixin($.core.v1.containerPort.newNamedUDP(6831, 'jaeger-compact')) +
-    container.withPortsMixin($.core.v1.containerPort.newNamed(14268, 'jaeger-thrift')) +
-    container.withPortsMixin($.core.v1.containerPort.newNamed(14250, 'jaeger-grpc')) +
-    container.withPortsMixin($.core.v1.containerPort.newNamed(9411, 'zipkin')) +
+    container.withPortsMixin($.core.v1.containerPort.newNamed(4317, 'otlp-grpc') + $.core.v1.containerPort.withHostPort(4317)) +
+    container.withPortsMixin($.core.v1.containerPort.newNamed(4318, 'otlp-http') + $.core.v1.containerPort.withHostPort(4318)) +
+    container.withPortsMixin($.core.v1.containerPort.newNamedUDP(6831, 'jaeger-compact') + $.core.v1.containerPort.withHostPort(6831)) +
+    container.withPortsMixin($.core.v1.containerPort.newNamed(5778, 'jaeger-sampling') + $.core.v1.containerPort.withHostPort(5778)) +
     container.withPortsMixin($.core.v1.containerPort.newNamed(8888, 'metrics')) +
     container.withArgsMixin('--config=/conf/agent.yml') +
     container.withEnv([
@@ -107,9 +105,7 @@ k + config {
                         { name: 'otlp-grpc', port: 4317, targetPort: 'otlp-grpc' },
                         { name: 'otlp-http', port: 4318, targetPort: 'otlp-http' },
                         { name: 'jaeger-compact', port: 6831, targetPort: 'jaeger-compact' },
-                        { name: 'jaeger-thrift', port: 14268, targetPort: 'jaeger-thrift' },
-                        { name: 'jaeger-grpc', port: 14250, targetPort: 'jaeger-grpc' },
-                        { name: 'zipkin', port: 9411, targetPort: 'zipkin' },
+                        { name: 'jaeger-sampling', port: 5778, targetPort: 'jaeger-sampling' },
                       ]) +
     agent_service.mixin.metadata.withLabelsMixin(boilerplateMetadata) +
     agent_service.mixin.spec.withType('ClusterIP'),

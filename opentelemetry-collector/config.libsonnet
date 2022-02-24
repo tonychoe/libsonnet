@@ -9,11 +9,20 @@
     // Default config
     agent_config: {
       receivers: {
+        otlp: {
+          protocols: {
+            grpc: { endpoint: '0.0.0.0:4317' },
+            http: { endpoint: '0.0.0.0:4318' },
+          },
+        },
         jaeger: {
           protocols: {
-            grpc: { endpoint: '0.0.0.0:14250' },
-            thrift_http: { endpoint: '0.0.0.0:14268' },
+            // grpc: { endpoint: '0.0.0.0:14250' },
+            // thrift_http: { endpoint: '0.0.0.0:14268' },
             thrift_compact: { endpoint: '0.0.0.0:6831' },
+          },
+          remote_sampling: {
+            host_endpoint: '0.0.0.0:5778',
           },
         },
       },
@@ -48,6 +57,7 @@
         pipelines: {
           traces: {
             receivers: [
+              'otlp',
               'jaeger',
             ],
             //
