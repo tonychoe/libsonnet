@@ -1,4 +1,4 @@
-# OpenTelemetry Collector Jsonnet Library
+# OpenTelemetry Collector Operator Jsonnet Library
 
 This repository contains the Jsonnet library for [OpenTelemetry Collector Operator's Custom Resource](https://github.com/open-telemetry/opentelemetry-operator/blob/main/docs/api.md).
 
