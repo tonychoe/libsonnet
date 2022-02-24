@@ -22,7 +22,7 @@ local gateway = (import 'github.com/tonychoe/libsonnet/opentelemetry-collector/g
 
 agent + gateway {
   _images+:: {
-    otelcol: 'us-phoenix-1.ocir.io/idvjmdrn1r3d/otel/opentelemetry-collector-contrib:0.44.0',
+    otelcol: 'otel/opentelemetry-collector-contrib:0.44.0',
   },
 
   _config+:: {
