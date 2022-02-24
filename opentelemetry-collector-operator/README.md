@@ -1,6 +1,6 @@
 # OpenTelemetry Collector Jsonnet Library
 
-This repository contains the Jsonnet library for [OpenTelemetry Collector Custom Resource](https://github.com/open-telemetry/opentelemetry-operator/blob/main/docs/api.md).
+This repository contains the Jsonnet library for [OpenTelemetry Collector Operator's Custom Resource](https://github.com/open-telemetry/opentelemetry-operator/blob/main/docs/api.md).
 
 ## Usage
 
@@ -11,13 +11,13 @@ This repository contains the Jsonnet library for [OpenTelemetry Collector Custom
 ```bash
 # Run this command at your tanka home
 
-$ jb install github.com/tonychoe/libsonnet/opentelemetry-collector
+$ jb install github.com/tonychoe/libsonnet/opentelemetry-collector-operator@master
 ```
 
-(3) To deploy OpenTelemetry Collectof, use the following example in your Tanka environment's `main.jsonnet` file:
+(3) To deploy OpenTelemetry Collector Custom Resource, use the following example in your Tanka environment's `main.jsonnet` file:
 
 ```jsonnet
-local otelcollector = (import 'github.com/tonychoe/libsonnet/opentelemetry-collector/opentelemetry-collector.libsonnet');
+local otelcollector = (import 'github.com/tonychoe/libsonnet/opentelemetry-collector-operator/opentelemetry-collector.libsonnet');
 {
   otelcollector_gateway:
     otelcollector.new('daemonset', $.util.manifestYaml($.otelcollector_config)),
