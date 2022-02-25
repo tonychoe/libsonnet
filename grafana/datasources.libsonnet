@@ -40,6 +40,8 @@
     tracesToLogs+: {
       datasourceUid: datasourceUid,
       tags: tags,
+      mappedTags: mappedTags,
+      mapTagNamesEnabled: mapTagNamesEnabled,
       spanStartTimeShift: spanStartTimeShift,
       spanEndTimeShift: spanEndTimeShift,
       filterByTraceID: filterByTraceID,
