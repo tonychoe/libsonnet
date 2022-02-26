@@ -73,6 +73,7 @@ k + config {
     deployment.new($._config.gateway_release_name, $._config.gateway_replicas, $.gateway_container, boilerplateMetadata)
     + deployment.metadata.withLabelsMixin(boilerplateMetadata)
     + deployment.spec.template.metadata.withLabelsMixin(boilerplateMetadata)
+    + deployment.spec.template.metadata.withAnnotationsMixin($._config.gateway_annotations)
     + deployment.spec.template.spec.withHostNetwork(false)
     + deployment.spec.template.spec.withServiceAccount($._config.gateway_release_name)
     + deployment.spec.template.spec.withTerminationGracePeriodSeconds(60)

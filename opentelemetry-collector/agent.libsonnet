@@ -88,6 +88,7 @@ k + config {
     daemonSet.new($._config.agent_release_name, [$.agent_container]) +
     daemonSet.metadata.withLabelsMixin(boilerplateMetadata) +
     daemonSet.spec.template.metadata.withLabelsMixin(boilerplateMetadata) +
+    daemonSet.spec.template.metadata.withAnnotationsMixin($._config.agent_annotations) +
     daemonSet.mixin.spec.template.spec.withServiceAccount($._config.agent_release_name) +
     $.util.configMapVolumeMount($.agent_config_map, '/conf'),
 

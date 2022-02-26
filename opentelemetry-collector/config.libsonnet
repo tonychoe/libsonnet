@@ -6,6 +6,7 @@
   _config+:: {
     namespace: error 'must define a namespace name',
     agent_release_name: error 'must define an agent release name',
+    agent_annotations: {},
     // Default config
     agent_config: {
       receivers: {
@@ -84,6 +85,7 @@
     },
 
     gateway_release_name: error 'must define a gateway release name',
+    gateway_annotations: {},
     gateway_replicas: 1,
     gateway_config: {
       receivers: {
