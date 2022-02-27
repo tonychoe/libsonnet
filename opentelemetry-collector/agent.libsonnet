@@ -56,6 +56,7 @@ k + config {
     container.withPortsMixin($.core.v1.containerPort.newNamed(4317, 'otlp-grpc') + $.core.v1.containerPort.withHostPort(4317)) +
     container.withPortsMixin($.core.v1.containerPort.newNamed(4318, 'otlp-http') + $.core.v1.containerPort.withHostPort(4318)) +
     container.withPortsMixin($.core.v1.containerPort.newNamedUDP(6831, 'jaeger-compact') + $.core.v1.containerPort.withHostPort(6831)) +
+    container.withPortsMixin($.core.v1.containerPort.newNamed(14268, 'jaeger-http') + $.core.v1.containerPort.withHostPort(14268)) +
     container.withPortsMixin($.core.v1.containerPort.newNamed(5778, 'jaeger-sampling') + $.core.v1.containerPort.withHostPort(5778)) +
     container.withPortsMixin($.core.v1.containerPort.newNamed(8888, 'metrics')) +
     container.withArgsMixin('--config=/conf/agent.yml') +
@@ -106,6 +107,7 @@ k + config {
                         { name: 'otlp-grpc', port: 4317, targetPort: 'otlp-grpc' },
                         { name: 'otlp-http', port: 4318, targetPort: 'otlp-http' },
                         { name: 'jaeger-compact', port: 6831, targetPort: 'jaeger-compact' },
+                        { name: 'jaeger-http', port: 14268, targetPort: 'jaeger-http' },
                         { name: 'jaeger-sampling', port: 5778, targetPort: 'jaeger-sampling' },
                       ]) +
     agent_service.mixin.metadata.withLabelsMixin(boilerplateMetadata) +
