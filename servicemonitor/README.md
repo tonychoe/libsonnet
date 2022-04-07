@@ -17,7 +17,7 @@ kubectl apply -f https://raw.githubusercontent.com/prometheus-community/helm-cha
 ```bash
 # Run this command at your tanka home
 
-$ jb install github.com/tonychoe/libsonnet/servicemonitor
+$ jb install github.com/tonychoe/libsonnet/servicemonitor@master
 ```
 
 (4) To deploy ServiceMonitor, use the following example in your Tanka environment's `main.jsonnet` file:
