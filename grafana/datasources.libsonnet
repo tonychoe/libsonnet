@@ -36,7 +36,7 @@
       url: url,
     }],
   }),
-  withTraceToLogs(datasourceUid, tags, spanStartTimeShift, spanEndTimeShift, filterByTraceID, filterBySpanID, lokiSearch):: self.withJsonData({
+  withTraceToLogs(datasourceUid, tags, mappedTags, mapTagNamesEnabled, spanStartTimeShift, spanEndTimeShift, filterByTraceID, filterBySpanID, lokiSearch):: self.withJsonData({
     tracesToLogs+: {
       datasourceUid: datasourceUid,
       tags: tags,
