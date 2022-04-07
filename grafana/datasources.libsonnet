@@ -49,6 +49,10 @@
       lokiSearch: lokiSearch,
     },
   }),
+  withAlertingSettings(manageAlerts, datasourceUid):: self.withJsonData({
+    manageAlerts: manageAlerts,
+    alertmanagerUid: datasourceUid,
+  }),
   withServiceGraphSettings(datasourceUid):: self.withJsonData({
     serviceMap+: {
       datasourceUid: datasourceUid,
