@@ -11,7 +11,7 @@ This repository contains the Jsonnet library for [Traefik](https://traefik.io/).
 ```bash
 # Run this command at your tanka home
 
-$ jb install github.com/tonychoe/libsonnet/traefik
+$ jb install github.com/tonychoe/libsonnet/traefik@master
 ```
 
 (3) Install the Traefik CRDs:
