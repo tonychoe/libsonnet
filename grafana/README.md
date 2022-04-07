@@ -13,6 +13,6 @@ It's forked from [Grafana Lab's Jsonnet library][https://github.com/grafana/json
 ```bash
 # Run this command at your tanka home
 
-$ jb install github.com/tonychoe/libsonnet/grafana
+$ jb install github.com/tonychoe/libsonnet/grafana@master
 ```
 
