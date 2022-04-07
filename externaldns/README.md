@@ -11,7 +11,7 @@ This repository contains the Jsonnet library for [ExternalDNS](https://github.co
 ```bash
 # Run this command at your tanka home
 
-$ jb install github.com/tonychoe/libsonnet/externaldns
+$ jb install github.com/tonychoe/libsonnet/externaldns@master
 ```
 
 (3) To deploy ExternalDNS, 
