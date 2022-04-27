@@ -28,12 +28,12 @@
   },
 
   // New returns an instance of PodMonitor
-  new(name, endpoints, selector):
+  new(name, podMetricsEndpoints, selector):
     {
       apiVersion: 'monitoring.coreos.com/v1',
       kind: 'PodMonitor',
     }
-    + self.spec.withEndpoints(endpoints)
+    + self.spec.withpodMetricsEndpoints(podMetricsEndpoints)
     + self.spec.withSelector(selector)
     + self.metadata.withName(name)
     + self.metadata.withLabelsMixin({
