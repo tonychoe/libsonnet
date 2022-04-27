@@ -68,6 +68,35 @@ local podservicemonitor = (import "github.com/tonychoe/libsonnet/podservicemonit
 }
 ```
 
+(4) To deploy PodMonitor, use the following example in your Tanka environment's `main.jsonnet` file:
+```
+local s = (import 'github.com/tonychoe/libsonnet/podservicemonitor/main.libsonnet');
+{
+
+  local podmetricsendpoint = s.podmetricsendpoint,
+  local podmonitor = s.podmonitor,
+  local relabelconfig = s.relabelconfig,
+
+  relabelconfig::
+    relabelconfig.new()
+    + relabelconfig.withSourceLabels(['__meta_kubernetes_namespace', '__meta_kubernetes_service_name'])
+    + relabelconfig.withSeparator('/')
+    + relabelconfig.withTargetLabel('job')
+    + relabelconfig.withRegex('(.*)')
+    + relabelconfig.withReplacement('$1')
+    + relabelconfig.withAction('replace')
+  ,
+
+  agent_podmonitor:
+    local app = 'otelcol-agent';
+    podmonitor.new(app, podmetricsendpoint.new() + podmetricsendpoint.withPort('metrics') + podmetricsendpoint.withRelabelings($.relabelconfig), podmonitor.labelSelector.withMatchLabels({ name: app })),
+
+  gateway_podmonitor:
+    local app = 'otelcol-gateway';
+    podmonitor.new(app, podmetricsendpoint.new() + podmetricsendpoint.withPort('metrics') + podmetricsendpoint.withRelabelings($.relabelconfig), podmonitor.labelSelector.withMatchLabels({ name: app })),
+}
+```
+
 ## Example
 
 * [Example](docs/servicemonitor.jsonnet)
