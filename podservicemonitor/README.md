@@ -24,7 +24,7 @@ $ jb install github.com/tonychoe/libsonnet/podservicemonitor@master
 (4) To deploy ServiceMonitor, use the following example in your Tanka environment's `main.jsonnet` file:
 
 ```jsonnet
-local podservicemonitor = (import "podservicemonitor/servicemonitor.libsonnet");
+local podservicemonitor = (import "github.com/tonychoe/libsonnet/podservicemonitor/main.libsonnet");
 {
 
   local endpoint = s.endpoint,
