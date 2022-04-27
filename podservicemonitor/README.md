@@ -1,6 +1,6 @@
-# ServiceMonitor Jsonnet Library
+# PodMonitor and ServiceMonitor Jsonnet Library
 
-This repository contains the Jsonnet library for [ServiceMonitor](https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#servicemonitor).
+This repository contains the Jsonnet library for [PodMonitor](https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#podmonitor) and [ServiceMonitor](https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#servicemonitor).
 
 ## Usage
 
@@ -10,6 +10,7 @@ This repository contains the Jsonnet library for [ServiceMonitor](https://github
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/prometheus-community/helm-charts/main/charts/kube-prometheus-stack/crds/crd-servicemonitors.yaml
+kubectl apply -f https://raw.githubusercontent.com/prometheus-community/helm-charts/main/charts/kube-prometheus-stack/crds/crd-podmonitors.yaml
 ```
 
 (3) Then you can install the library with:
@@ -17,13 +18,13 @@ kubectl apply -f https://raw.githubusercontent.com/prometheus-community/helm-cha
 ```bash
 # Run this command at your tanka home
 
-$ jb install github.com/tonychoe/libsonnet/servicemonitor@master
+$ jb install github.com/tonychoe/libsonnet/podservicemonitor@master
 ```
 
 (4) To deploy ServiceMonitor, use the following example in your Tanka environment's `main.jsonnet` file:
 
 ```jsonnet
-local servicemonitor = (import "servicemonitor/servicemonitor.libsonnet");
+local podservicemonitor = (import "podservicemonitor/servicemonitor.libsonnet");
 {
 
   local endpoint = s.endpoint,

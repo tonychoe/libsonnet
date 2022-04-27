@@ -1,3 +1,12 @@
+## 2022/04/26
+
+Second release
+
+Added support for the following Prometheus Operator APIs
+* PodMonitor
+* PodMonitorSpec
+
+Changed the repo name
 
 ## 2021/03/31 
 
