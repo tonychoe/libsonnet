@@ -69,7 +69,7 @@ local podservicemonitor = (import "github.com/tonychoe/libsonnet/podservicemonit
 ```
 
 (4) To deploy PodMonitor, use the following example in your Tanka environment's `main.jsonnet` file:
-```
+```jsonnet
 local s = (import 'github.com/tonychoe/libsonnet/podservicemonitor/main.libsonnet');
 {
 
