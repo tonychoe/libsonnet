@@ -1,3 +1,10 @@
+## 2022/05/29
+
+Renamed to prometheus-operator
+
+Added support for the following Prometheus Operator APIs
+* PrometheusRule
+
 ## 2022/04/26
 
 Second release

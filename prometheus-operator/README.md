@@ -7,10 +7,12 @@ This repository contains the Jsonnet library for [PodMonitor](https://github.com
 (1) To use this library, install [Tanka](https://tanka.dev/), [Jsonnet Bundler](https://tanka.dev/install#jsonnet-bundler) and Prometheus Operator CRD.
 
 (2) Ensure your cluster already have the latest version of ServiceMonitor CRD installed.
+Use 'apply' or 'replace' command.
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/prometheus-community/helm-charts/main/charts/kube-prometheus-stack/crds/crd-servicemonitors.yaml
 kubectl apply -f https://raw.githubusercontent.com/prometheus-community/helm-charts/main/charts/kube-prometheus-stack/crds/crd-podmonitors.yaml
+kubectl apply -f https://raw.githubusercontent.com/prometheus-community/helm-charts/main/charts/kube-prometheus-stack/crds/crd-prometheuses.yaml
 ```
 
 (3) Then you can install the library with:
@@ -18,13 +20,13 @@ kubectl apply -f https://raw.githubusercontent.com/prometheus-community/helm-cha
 ```bash
 # Run this command at your tanka home
 
-$ jb install github.com/tonychoe/libsonnet/podservicemonitor@master
+$ jb install github.com/tonychoe/libsonnet/prometheus-operator@master
 ```
 
 (4) To deploy ServiceMonitor, use the following example in your Tanka environment's `main.jsonnet` file:
 
 ```jsonnet
-local podservicemonitor = (import "podservicemonitor/servicemonitor.libsonnet");
+local s = (import "prometheus-operator/servicemonitor.libsonnet");
 {
 
   local endpoint = s.endpoint,
