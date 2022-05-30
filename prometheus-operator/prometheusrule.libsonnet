@@ -19,7 +19,7 @@
     + self.metadata.withName(name)
     + self.metadata.withLabelsMixin({
       'app.kubernetes.io/name': name,
-      'app.kubernetes.io/instance': name + '-servicemonitor',
+      'app.kubernetes.io/instance': name + '-recording-rule',
     }),
   spec: {
     withGroups(groups): { spec+: { groups: groups } },
