@@ -26,7 +26,11 @@ $ jb install github.com/tonychoe/libsonnet/prometheus-operator@master
 (4) To deploy ServiceMonitor, use the following example in your Tanka environment's `main.jsonnet` file:
 
 ```jsonnet
+<<<<<<< HEAD:prometheus-operator/README.md
 local s = (import "prometheus-operator/servicemonitor.libsonnet");
+=======
+local s = (import "github.com/tonychoe/libsonnet/podservicemonitor/main.libsonnet");
+>>>>>>> 22c6618d4f3a513a0a09cd3582e4af92e06a61ba:podservicemonitor/README.md
 {
 
   local endpoint = s.endpoint,
@@ -67,6 +71,35 @@ local s = (import "prometheus-operator/servicemonitor.libsonnet");
       + endpoint.withRelabelings( $.relabelconfig ), 
       servicemonitor.labelSelector.withMatchLabels( { name: app } ) 
     ),
+}
+```
+
+(4) To deploy PodMonitor, use the following example in your Tanka environment's `main.jsonnet` file:
+```jsonnet
+local s = (import 'github.com/tonychoe/libsonnet/podservicemonitor/main.libsonnet');
+{
+
+  local podmetricsendpoint = s.podmetricsendpoint,
+  local podmonitor = s.podmonitor,
+  local relabelconfig = s.relabelconfig,
+
+  relabelconfig::
+    relabelconfig.new()
+    + relabelconfig.withSourceLabels(['__meta_kubernetes_namespace', '__meta_kubernetes_service_name'])
+    + relabelconfig.withSeparator('/')
+    + relabelconfig.withTargetLabel('job')
+    + relabelconfig.withRegex('(.*)')
+    + relabelconfig.withReplacement('$1')
+    + relabelconfig.withAction('replace')
+  ,
+
+  agent_podmonitor:
+    local app = 'otelcol-agent';
+    podmonitor.new(app, podmetricsendpoint.new() + podmetricsendpoint.withPort('metrics') + podmetricsendpoint.withRelabelings($.relabelconfig), podmonitor.labelSelector.withMatchLabels({ name: app })),
+
+  gateway_podmonitor:
+    local app = 'otelcol-gateway';
+    podmonitor.new(app, podmetricsendpoint.new() + podmetricsendpoint.withPort('metrics') + podmetricsendpoint.withRelabelings($.relabelconfig), podmonitor.labelSelector.withMatchLabels({ name: app })),
 }
 ```
 
