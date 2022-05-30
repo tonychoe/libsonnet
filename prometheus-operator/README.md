@@ -1,6 +1,9 @@
-# PodMonitor and ServiceMonitor Jsonnet Library
+# Prometheus Operator Jsonnet Library
 
-This repository contains the Jsonnet library for [PodMonitor](https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#podmonitor) and [ServiceMonitor](https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#servicemonitor).
+This repository contains the Jsonnet library for these APIs 
+* [PodMonitor](https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#podmonitor) 
+* [ServiceMonitor](https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#servicemonitor)
+* [PrometheusRule](https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#prometheusrule)
 
 ## Usage
 
@@ -21,16 +24,14 @@ kubectl apply -f https://raw.githubusercontent.com/prometheus-community/helm-cha
 # Run this command at your tanka home
 
 $ jb install github.com/tonychoe/libsonnet/prometheus-operator@master
+or 
+$ jb update github.com/tonychoe/libsonnet/prometheus-operator@master
 ```
 
 (4) To deploy ServiceMonitor, use the following example in your Tanka environment's `main.jsonnet` file:
 
 ```jsonnet
-<<<<<<< HEAD:prometheus-operator/README.md
-local s = (import "prometheus-operator/servicemonitor.libsonnet");
-=======
-local s = (import "github.com/tonychoe/libsonnet/podservicemonitor/main.libsonnet");
->>>>>>> 22c6618d4f3a513a0a09cd3582e4af92e06a61ba:podservicemonitor/README.md
+local s = (import "github.com/tonychoe/libsonnet/prometheus-operator/main.libsonnet");
 {
 
   local endpoint = s.endpoint,
@@ -76,7 +77,7 @@ local s = (import "github.com/tonychoe/libsonnet/podservicemonitor/main.libsonne
 
 (4) To deploy PodMonitor, use the following example in your Tanka environment's `main.jsonnet` file:
 ```jsonnet
-local s = (import 'github.com/tonychoe/libsonnet/podservicemonitor/main.libsonnet');
+local s = (import 'github.com/tonychoe/libsonnet/prometheus-operator/main.libsonnet');
 {
 
   local podmetricsendpoint = s.podmetricsendpoint,
