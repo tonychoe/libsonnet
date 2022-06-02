@@ -102,9 +102,9 @@ k + config {
     gateway_service.new($._config.gateway_release_name,
                         boilerplateMetadata,
                         [
-                          { name: 'metrics', port: 8888, targetPort: 8888 },
-                          { name: 'otlp-grpc', port: 4317, targetPort: 4317 },
-                          { name: 'otlp-http', port: 4318, targetPort: 4318 },
+                          { name: 'metrics', port: 8888, targetPort: 'metrics' },
+                          { name: 'otlp-grpc', port: 4317, targetPort: 'otlp-grpc' },
+                          { name: 'otlp-http', port: 4318, targetPort: 'otlp-http' },
                         ]) +
     gateway_service.mixin.metadata.withLabelsMixin(boilerplateMetadata) +
     gateway_service.mixin.spec.withType('ClusterIP'),

@@ -104,7 +104,7 @@ k + config {
     agent_service.new($._config.agent_release_name,
                       boilerplateMetadata,
                       [
-                        { name: 'metrics', port: 8888, targetPort: 8888 },
+                        { name: 'metrics', port: 8888, targetPort: 'metrics' },
                         { name: 'otlp-grpc', port: 4317, targetPort: 'otlp-grpc' },
                         { name: 'otlp-http', port: 4318, targetPort: 'otlp-http' },
                         { name: 'jaeger-compact', port: 6831, targetPort: 'jaeger-compact' },

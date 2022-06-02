@@ -86,7 +86,7 @@ local s = (import 'github.com/tonychoe/libsonnet/prometheus-operator/main.libson
 
   relabelconfig::
     relabelconfig.new()
-    + relabelconfig.withSourceLabels(['__meta_kubernetes_namespace', '__meta_kubernetes_service_name'])
+    + relabelconfig.withSourceLabels(['__meta_kubernetes_namespace', '__meta_kubernetes_pod_label_name'])
     + relabelconfig.withSeparator('/')
     + relabelconfig.withTargetLabel('job')
     + relabelconfig.withRegex('(.*)')
