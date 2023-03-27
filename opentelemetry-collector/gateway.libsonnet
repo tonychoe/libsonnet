@@ -48,6 +48,8 @@ k + config {
   gateway_container::
     container.new('gateway', $._images.otelcol) +
     container.withPortsMixin($.core.v1.containerPort.newNamed(8888, 'metrics')) +
+    container.withPortsMixin($.core.v1.containerPort.newNamed(4317, 'otlp-grpc')) +
+    container.withPortsMixin($.core.v1.containerPort.newNamed(4318, 'otlp-http')) +
     container.withArgsMixin('--config=/conf/gateway.yml') +
     container.withEnv([
       $.core.v1.envVar.fromFieldPath('KUBE_NODE_NAME', 'spec.nodeName'),
