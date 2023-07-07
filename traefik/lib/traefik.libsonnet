@@ -26,13 +26,13 @@ k {
   local container = $.core.v1.container,
   local containerPort = $.core.v1.containerPort,
   local volumeMount = $.core.v1.volumeMount,
+  local envVar = $.core.v1.envVar,
 
   traefik_container::
     container.new($._config.traefik.release_name, $._images.traefik_image) +
     container.withArgs(containerArgs) +
-    container.withEnv([{$.core.v1.envVar.fromFieldPath('JAEGER_AGENT_HOST', 'status.hostIP') +
     container.withEnv([
-      $.core.v1.envVar.fromFieldPath('JAEGER_AGENT_HOST', 'status.hostIP'),
+      envVar.fromFieldPath('JAEGER_AGENT_HOST', 'status.hostIP'),
     ]) +
     container.withPorts([
       containerPort.newNamed($._config.traefik.entrypoints_port, 'traefik'),
