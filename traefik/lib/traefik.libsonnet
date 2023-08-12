@@ -1,5 +1,5 @@
-// local k = import 'github.com/jsonnet-libs/k8s-libsonnet/1.19/main.libsonnet';
 local k = import 'k.libsonnet';
+local util = (import 'github.com/grafana/jsonnet-libs/ksonnet-util/util.libsonnet');
 
 k {
   local boilerplateMetadata = {
@@ -148,5 +148,5 @@ k {
     }),
 
   traefik_service:
-    $.util.serviceFor($.traefik_deployment),
+    util.serviceFor($.traefik_deployment),
 }
