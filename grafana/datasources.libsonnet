@@ -36,6 +36,15 @@
       url: url,
     }],
   }),
+  withTracesToMetrics(datasourceUid, tags, spanStartTimeShift, spanEndTimeShift, queries):: self.withJsonData({
+    tracesToMetrics+: {
+      datasourceUid: datasourceUid,
+      tags: tags,
+      spanStartTimeShift: spanStartTimeShift,
+      spanEndTimeShift: spanEndTimeShift,
+      queries: queries,
+    },
+  }),
   withTraceToLogs(datasourceUid, tags, mappedTags, mapTagNamesEnabled, spanStartTimeShift, spanEndTimeShift, filterByTraceID, filterBySpanID, lokiSearch):: self.withJsonData({
     tracesToLogs+: {
       datasourceUid: datasourceUid,
