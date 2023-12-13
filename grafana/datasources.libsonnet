@@ -46,7 +46,7 @@
     },
   }),
   withTraceToLogsV2(datasourceUid, spanStartTimeShift, spanEndTimeShift, tags, filterByTraceID, filterBySpanID, customQuery, query):: self.withJsonData({
-    tracesToLogs+: {
+    tracesToLogsV2+: {
       datasourceUid: datasourceUid,
       spanStartTimeShift: spanStartTimeShift,
       spanEndTimeShift: spanEndTimeShift,
