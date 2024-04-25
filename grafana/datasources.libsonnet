@@ -28,13 +28,14 @@
   withUid(uid):: {
     uid: uid,
   },
-  withDerivedFields(datasourceUid, matcherRegex, matcherType, name, url):: self.withJsonData({
+  withDerivedFields(datasourceUid, matcherRegex, matcherType, name, url, urlDisplayLabel):: self.withJsonData({
     derivedFields+: [{
       datasourceUid: datasourceUid,
       matcherType: matcherType,
       matcherRegex: matcherRegex,
       name: name,
       url: url,
+      urlDisplayLabel: trace,
     }],
   }),
   withTracesToMetrics(datasourceUid, tags, spanStartTimeShift, spanEndTimeShift, queries):: self.withJsonData({
