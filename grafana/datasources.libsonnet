@@ -35,7 +35,7 @@
       matcherRegex: matcherRegex,
       name: name,
       url: url,
-      urlDisplayLabel: trace,
+      urlDisplayLabel: urlDisplayLabel,
     }],
   }),
   withTracesToMetrics(datasourceUid, tags, spanStartTimeShift, spanEndTimeShift, queries):: self.withJsonData({
