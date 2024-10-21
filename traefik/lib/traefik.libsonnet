@@ -96,7 +96,7 @@ k {
       policyRule.withApiGroups(['extensions', 'networking.k8s.io']) +
       policyRule.withResources(['ingresses/status']) +
       policyRule.withVerbs(['update']),
-      policyRule.withApiGroups(['traefik.containo.us']) +
+      policyRule.withApiGroups(['traefik.io']) +
       policyRule.withResources(['ingressroutes', 'ingressroutetcps', 'ingressrouteudps', 'middlewares', 'middlewaretcps', 'tlsoptions', 'tlsstores', 'traefikservices', 'serverstransports']) +
       policyRule.withVerbs(['get', 'list', 'watch']),
     ]),
