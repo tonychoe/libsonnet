@@ -88,8 +88,11 @@ k {
     clusterRole.metadata.withLabelsMixin(boilerplateMetadata) +
     clusterRole.withRulesMixin([
       policyRule.withApiGroups('') +
-      policyRule.withResources(['services', 'endpoints', 'secrets']) +
+      policyRule.withResources(['services', 'secrets', 'nodes']) +
       policyRule.withVerbs(['get', 'list', 'watch']),
+      policyRule.withApiGroups('discovery.k8s.io') +
+      policyRule.withResources('endpointslices') +
+      policyRule.withVerbs(['list', 'watch']),
       policyRule.withApiGroups(['extensions', 'networking.k8s.io']) +
       policyRule.withResources(['ingresses', 'ingressclasses']) +
       policyRule.withVerbs(['get', 'list', 'watch']),
@@ -97,7 +100,7 @@ k {
       policyRule.withResources(['ingresses/status']) +
       policyRule.withVerbs(['update']),
       policyRule.withApiGroups(['traefik.io']) +
-      policyRule.withResources(['ingressroutes', 'ingressroutetcps', 'ingressrouteudps', 'middlewares', 'middlewaretcps', 'tlsoptions', 'tlsstores', 'traefikservices', 'serverstransports']) +
+      policyRule.withResources(['ingressroutes', 'ingressroutetcps', 'ingressrouteudps', 'middlewares', 'middlewaretcps', 'tlsoptions', 'tlsstores', 'traefikservices', 'serverstransports', 'serverstransporttcps']) +
       policyRule.withVerbs(['get', 'list', 'watch']),
     ]),
 
