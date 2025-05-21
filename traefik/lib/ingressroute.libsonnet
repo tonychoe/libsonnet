@@ -50,5 +50,6 @@
         withServersTransport(serversTransport): { serversTransport: serversTransport },
       },
     },
+    withTls(secretName): { spec+: { tls: { secretName: secretName } } },
   },
 }
