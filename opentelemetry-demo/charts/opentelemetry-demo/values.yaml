@@ -682,7 +682,7 @@ components:
       runAsNonRoot: true
 
 opentelemetry-collector:
-  enabled: true
+  enabled: false
   image:
     repository: "otel/opentelemetry-collector-contrib"
   fullnameOverride: otel-collector
@@ -783,7 +783,7 @@ opentelemetry-collector:
                     endpoint: otel-collector:4318
 
 jaeger:
-  enabled: true
+  enabled: false
   fullnameOverride: jaeger
   provisionDataStore:
     cassandra: false
@@ -815,7 +815,7 @@ jaeger:
     enabled: false
 
 prometheus:
-  enabled: true
+  enabled: false
   alertmanager:
     enabled: false
   configmapReload:
@@ -869,7 +869,7 @@ prometheus:
         memory: 300Mi
 
 grafana:
-  enabled: true
+  enabled: false
   fullnameOverride: grafana
   testFramework:
     enabled: false
@@ -946,7 +946,7 @@ grafana:
       memory: 150Mi
 
 opensearch:
-  enabled: true
+  enabled: false
   fullnameOverride: opensearch
   clusterName: demo-cluster
   nodeGroup: otel-demo
