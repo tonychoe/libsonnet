@@ -3,32 +3,38 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: example-otelcol
+  name: otel-collector
   namespace: default
   labels:
-    helm.sh/chart: opentelemetry-collector-0.77.0
-    app.kubernetes.io/name: otelcol
+    helm.sh/chart: opentelemetry-collector-0.117.1
+    app.kubernetes.io/name: opentelemetry-collector
     app.kubernetes.io/instance: example
-    app.kubernetes.io/version: "0.91.0"
+    app.kubernetes.io/version: "0.120.0"
     app.kubernetes.io/managed-by: Helm
-    
+    app.kubernetes.io/component: standalone-collector
 data:
   relay: |
     connectors:
-      spanmetrics: null
+      spanmetrics: {}
     exporters:
       debug: {}
-      logging: {}
+      opensearch:
+        http:
+          endpoint: http://opensearch:9200
+          tls:
+            insecure: true
+        logs_index: otel
       otlp:
-        endpoint: 'example-jaeger-collector:4317'
+        endpoint: jaeger-collector:4317
         tls:
           insecure: true
       otlphttp/prometheus:
-        endpoint: http://example-prometheus-server:9090/api/v1/otlp
+        endpoint: http://prometheus:9090/api/v1/otlp
         tls:
           insecure: true
     extensions:
-      health_check: {}
+      health_check:
+        endpoint: ${env:MY_POD_IP}:13133
     processors:
       attributes:
         actions:
@@ -40,11 +46,6 @@ data:
           services:
           - frontend-proxy
       batch: {}
-      filter/ottl:
-        error_mode: ignore
-        metrics:
-          metric:
-          - name == "rpc.server.duration"
       k8sattributes:
         extract:
           metadata:
@@ -78,13 +79,16 @@ data:
           from_attribute: k8s.pod.uid
           key: service.instance.id
       transform:
-        metric_statements:
-        - context: metric
+        error_mode: ignore
+        trace_statements:
+        - context: span
           statements:
-          - set(description, "") where name == "queueSize"
-          - set(description, "") where name == "rpc.server.duration"
-          - set(description, "") where name == "http.client.duration"
+          - replace_pattern(name, "\\?.*", "")
+          - replace_match(name, "GET /api/products/*", "GET /api/products/{productId}")
     receivers:
+      httpcheck/frontend-proxy:
+        targets:
+        - endpoint: http://frontend-proxy:8080
       jaeger:
         protocols:
           grpc:
@@ -111,6 +115,9 @@ data:
             static_configs:
             - targets:
               - ${env:MY_POD_IP}:8888
+      redis:
+        collection_interval: 10s
+        endpoint: valkey-cart:6379
       zipkin:
         endpoint: ${env:MY_POD_IP}:9411
     service:
@@ -119,10 +126,12 @@ data:
       pipelines:
         logs:
           exporters:
+          - opensearch
           - debug
           processors:
           - k8sattributes
           - memory_limiter
+          - resource
           - batch
           receivers:
           - otlp
@@ -133,11 +142,11 @@ data:
           processors:
           - k8sattributes
           - memory_limiter
-          - filter/ottl
-          - transform
           - resource
           - batch
           receivers:
+          - httpcheck/frontend-proxy
+          - redis
           - otlp
           - spanmetrics
         traces:
@@ -158,3 +167,12 @@ data:
       telemetry:
         metrics:
           address: ${env:MY_POD_IP}:8888
+          level: detailed
+          readers:
+          - periodic:
+              exporter:
+                otlp:
+                  endpoint: otel-collector:4318
+                  protocol: grpc
+              interval: 10000
+              timeout: 5000
