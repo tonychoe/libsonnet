@@ -68,10 +68,10 @@ k + config {
     container.mixin.readinessProbe.httpGet.withPort(13133) +
     container.mixin.readinessProbe.withInitialDelaySeconds(10) +
     container.mixin.readinessProbe.withTimeoutSeconds(1) +
-    container.mixin.readinessProbe.httpGet.withPath('/') +
-    container.mixin.readinessProbe.httpGet.withPort(13133) +
-    container.mixin.readinessProbe.withInitialDelaySeconds(10) +
-    container.mixin.readinessProbe.withTimeoutSeconds(1) +
+    container.mixin.livenessProbe.httpGet.withPath('/') +
+    container.mixin.livenessProbe.httpGet.withPort(13133) +
+    container.mixin.livenessProbe.withInitialDelaySeconds(10) +
+    container.mixin.livenessProbe.withTimeoutSeconds(1) +
     // currently configured to run as non-root
     container.securityContext.capabilities.withDrop('ALL') +
     container.securityContext.withRunAsNonRoot(true) +

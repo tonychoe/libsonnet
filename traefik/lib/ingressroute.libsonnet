@@ -47,8 +47,10 @@
         withNamespace(namespace): { namespace: namespace },
         withPort(port): { port: port },
         withStrategy(strategy): { strategy: strategy },
+        withScheme(scheme): { scheme: scheme },
         withServersTransport(serversTransport): { serversTransport: serversTransport },
       },
     },
+    withTls(secretName): { spec+: { tls: { secretName: secretName } } },
   },
 }
