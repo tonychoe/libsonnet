@@ -32,8 +32,22 @@ traefik {
   },
 
   local ingressroute = import 'traefik/ingressroute.libsonnet',
+  local tlsoption = import 'traefik/tlsoption.libsonnet',
   local routes = ingressroute.spec.routes,
   local services = ingressroute.spec.routes.services,
+  local clientAuth = tlsoption.spec.clientAuth,
+
+  tlsoption:
+    tlsoption.new('my-default-tls') +
+    tlsoption.spec.withMinVersion('VersionTLS12') +
+    tlsoption.spec.withSniStrict(true) +
+    tlsoption.spec.withCipherSuitesMixin([
+      'TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256',
+      'TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384',
+    ]) +
+    tlsoption.spec.withClientAuth(
+      clientAuth.new('NoClientCert'),
+    ),
 
   ingressroute:
     ingressroute.new('my') +
@@ -47,5 +61,7 @@ traefik {
         services.withNamespace($._config.namespace) +
         services.withPort(8080),
       ]),
-    ),
+    ) +
+    ingressroute.spec.withTls('my-tls-secret') +
+    ingressroute.spec.withTlsOptions('my-default-tls'),
 }

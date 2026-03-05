@@ -17,6 +17,7 @@ $ jb install github.com/tonychoe/libsonnet/traefik@master
 (3) Install the Traefik CRDs:
 
 * They are the cluster-wide resource, so you just need to install only once.
+* CRD reference for humans: https://doc.crds.dev/github.com/traefik/traefik
 
 ```jsonnet
 kubectl apply -f https://raw.githubusercontent.com/traefik/traefik-helm-chart/master/traefik-crds/crds-files/traefik/traefik.io_ingressroutes.yaml
@@ -43,9 +44,26 @@ traefik {
 }
 ```
 
-(5) To add new ingressroute, see the example.
+(5) To add a TLSOption and attach it to an IngressRoute:
+
+```jsonnet
+local ingressroute = import "traefik/ingressroute.libsonnet";
+local tlsoption = import "traefik/tlsoption.libsonnet";
+
+{
+  tlsoption:
+    tlsoption.new("strict-tls") +
+    tlsoption.spec.withMinVersion("VersionTLS12") +
+    tlsoption.spec.withSniStrict(true),
+  ingressroute:
+    ingressroute.new("my") +
+    ingressroute.spec.withTls("my-tls-secret") +
+    ingressroute.spec.withTlsOptions("strict-tls"),
+}
+```
+
+(6) To add new ingressroute, see the example.
 
 ## Example
 
 * [Example 1](examples/traefik.jsonnet)
-

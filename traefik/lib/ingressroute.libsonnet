@@ -51,6 +51,25 @@
         withServersTransport(serversTransport): { serversTransport: serversTransport },
       },
     },
-    withTls(secretName): { spec+: { tls: { secretName: secretName } } },
+    tls: {
+      withSecretName(secretName): { tls+: { secretName: secretName } },
+      withOptions(options): { tls+: { options: options } },
+      options: {
+        new(name): {
+          name: name,
+        },
+        withNamespace(namespace): { namespace: namespace },
+      },
+    },
+    withTls(secretName): { spec+: { tls+: { secretName: secretName } } },
+    // **Note:** This function appends passed data to existing values
+    withTlsMixin(tls): { spec+: { tls+: tls } },
+    withTlsOptions(name, namespace=null): {
+      spec+: {
+        tls+: {
+          options: if namespace == null then { name: name } else { name: name, namespace: namespace },
+        },
+      },
+    },
   },
 }
