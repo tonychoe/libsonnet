@@ -32,6 +32,7 @@
     // **Note:** This function appends passed data to existing values
     withAlpnProtocolsMixin(alpnProtocols): { spec+: { alpnProtocols+: if std.isArray(v=alpnProtocols) then alpnProtocols else [alpnProtocols] } },
     withSniStrict(sniStrict): { spec+: { sniStrict: sniStrict } },
+    withDisableSessionTickets(disableSessionTickets): { spec+: { disableSessionTickets: disableSessionTickets } },
     withPreferServerCipherSuites(preferServerCipherSuites): { spec+: { preferServerCipherSuites: preferServerCipherSuites } },
     withClientAuth(clientAuth): { spec+: { clientAuth: clientAuth } },
     // **Note:** This function appends passed data to existing values

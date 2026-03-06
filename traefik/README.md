@@ -64,6 +64,27 @@ local tlsoption = import "traefik/tlsoption.libsonnet";
 
 (6) To add new ingressroute, see the example.
 
+## CRD Helpers
+
+This library includes helper modules for the current Traefik CRDs:
+
+* `traefik/ingressroute.libsonnet`
+* `traefik/ingressroutetcp.libsonnet`
+* `traefik/ingressrouteudp.libsonnet`
+* `traefik/middleware.libsonnet`
+* `traefik/middlewaretcp.libsonnet`
+* `traefik/serverstransport.libsonnet`
+* `traefik/serverstransporttcp.libsonnet`
+* `traefik/tlsoption.libsonnet`
+* `traefik/tlsstore.libsonnet`
+* `traefik/traefikservice.libsonnet`
+
+All helpers provide:
+
+* `new(name)` for object creation
+* `spec.withSpec(spec)` for full spec replacement
+* `spec.withSpecMixin(spec)` for additive spec merge
+
 ## Example
 
 * [Example 1](examples/traefik.jsonnet)
