@@ -1,25 +1,13 @@
+local common = import '_common.libsonnet';
+
 {
-  metadata: {
-    // Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels
-    withLabels(labels): { metadata+: { labels: labels } },
-    // Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels
-    // **Note:** This function appends passed data to existing values
-    withLabelsMixin(labels): { metadata+: { labels+: labels } },
-    // Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names
-    withName(name): { metadata+: { name: name } },
-  },
+  metadata: common.metadata,
 
   // New returns an instance of tlsOption
   // More info: https://doc.traefik.io/traefik/reference/dynamic-configuration/kubernetes-crd/
-  new(name): {
-               apiVersion: 'traefik.io/v1alpha1',
-               kind: 'TLSOption',
-             } + self.metadata.withName(name=name) +
-             self.metadata.withLabelsMixin({
-               'app.kubernetes.io/name': 'traefik',
-               'app.kubernetes.io/instance': name,
-             }),
-  spec: {
+  new(name): common.newResource('TLSOption', name),
+
+  spec: common.spec {
     withMinVersion(minVersion): { spec+: { minVersion: minVersion } },
     withMaxVersion(maxVersion): { spec+: { maxVersion: maxVersion } },
     withCipherSuites(cipherSuites): { spec+: { cipherSuites: if std.isArray(v=cipherSuites) then cipherSuites else [cipherSuites] } },

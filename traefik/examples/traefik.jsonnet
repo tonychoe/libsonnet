@@ -1,4 +1,5 @@
 local traefik = (import 'traefik/traefik.libsonnet');
+local traefikCrds = import 'traefik/crds.libsonnet';
 
 traefik {
   // Use this to override the image
@@ -31,8 +32,8 @@ traefik {
     },
   },
 
-  local ingressroute = import 'traefik/ingressroute.libsonnet',
-  local tlsoption = import 'traefik/tlsoption.libsonnet',
+  local ingressroute = traefikCrds.ingressroute,
+  local tlsoption = traefikCrds.tlsoption,
   local routes = ingressroute.spec.routes,
   local services = ingressroute.spec.routes.services,
   local clientAuth = tlsoption.spec.clientAuth,
